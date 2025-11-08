@@ -1,0 +1,16 @@
+miniconda3
+packages
+stable-diffusion-3.5-medium
+tmux-offline
+.sii
+*.png
+images
+experiments
+wandb
+diffusers/build
+diffusers/docs
+*.pth
+*.pt
+*.safetensor
+mmdetection
+geneval/models
