@@ -1,6 +1,6 @@
 export MODEL_NAME="/inspire/hdd/project/25jinqiu14/sunyihang-P-253130146/stable-diffusion-3.5-medium"
 export DATASET_NAME="/inspire/hdd/project/25jinqiu14/public/datasets_new/vismin"
-export OUTPUT_DIR="/inspire/hdd/project/25jinqiu14/sunyihang-P-253130146/diffusers/experiments_lora"
+export OUTPUT_DIR="/inspire/hdd/project/25jinqiu14/sunyihang-P-253130146/diffusers/experiments/sft-lora"
 export WANDB_MODE=offline
 export WANDB_DIR=/inspire/hdd/project/25jinqiu14/sunyihang-P-253130146/diffusers
 
@@ -16,7 +16,7 @@ accelerate launch train_text_to_image_lora_sd3.py \
   --checkpointing_steps=500 \
   --checkpoints_total_limit=3 \
   --resolution=512 \
-  --max_train_steps=10000 \
+  --max_train_steps=20000 \
   --train_batch_size=1 \
   --gradient_accumulation_steps=4 \
   --learning_rate=1e-4 \
@@ -28,6 +28,5 @@ accelerate launch train_text_to_image_lora_sd3.py \
   --report_to=wandb \
   --output_dir=$OUTPUT_DIR \
   --gradient_checkpointing \
-  --mixed_precision="fp16" \
   2>&1 | tee "$OUTPUT_DIR/train.log"
 

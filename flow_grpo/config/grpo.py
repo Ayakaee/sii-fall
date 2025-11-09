@@ -128,7 +128,7 @@ def geneval_sd3():
     config.dataset = os.path.join(os.getcwd(), "dataset/geneval")
 
     # sd3.5 medium
-    config.pretrained.model = "stabilityai/stable-diffusion-3.5-medium"
+    config.pretrained.model = "/inspire/hdd/project/25jinqiu14/sunyihang-P-253130146/stable-diffusion-3.5-medium"
     config.sample.num_steps = 10
     config.sample.eval_num_steps = 40
     config.sample.guidance_scale = 4.5

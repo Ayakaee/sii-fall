@@ -5,6 +5,11 @@ export WANDB_MODE=offline
 export WANDB_DIR=/inspire/hdd/project/25jinqiu14/sunyihang-P-253130146/diffusers
 
 mkdir -p "$OUTPUT_DIR"
+export workspace="/inspire/hdd/project/25jinqiu14/sunyihang-P-253130146"
+export ckpt=6000
+
+rm $workspace/stable-diffusion-3.5-medium/transformer/diffusion_pytorch_model.safetensors
+cp $workspace/diffusers/experiments/checkpoint-$ckpt+16k/transformer/diffusion_pytorch_model.safetensors $workspace/stable-diffusion-3.5-medium/transformer/
 
 accelerate launch train_text_to_image_sd3.py \
   --pretrained_model_name_or_path=$MODEL_NAME \
@@ -15,10 +20,10 @@ accelerate launch train_text_to_image_sd3.py \
   --validation_steps=2000 \
   --checkpointing_steps=2000 \
   --resolution=512 \
-  --max_train_steps=15000 \
-  --train_batch_size=1 \
+  --max_train_steps=30000 \
+  --train_batch_size=8 \
   --gradient_accumulation_steps=1 \
-  --learning_rate=1e-5 \
+  --learning_rate=5e-6 \
   --seed=42 \
   --report_to wandb \
   --output_dir=$OUTPUT_DIR \
