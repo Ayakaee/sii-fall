@@ -123,7 +123,7 @@ def general_ocr_sd3():
     return config
 
 def geneval_sd3():
-    gpu_number = 32
+    gpu_number = 4
     config = compressibility()
     config.dataset = os.path.join(os.getcwd(), "dataset/geneval")
 
@@ -132,9 +132,10 @@ def geneval_sd3():
     config.sample.num_steps = 10
     config.sample.eval_num_steps = 40
     config.sample.guidance_scale = 4.5
+    config.train.lora_path = '/inspire/hdd/project/25jinqiu14/sunyihang-P-253130146/flow_grpo/logs/geneval/sd3.5-M/checkpoints/checkpoint-20/lora'
 
     config.resolution = 512
-    config.sample.train_batch_size = 9
+    config.sample.train_batch_size = 12
     config.sample.num_image_per_prompt = 24
     config.sample.num_batches_per_epoch = int(48/(gpu_number*config.sample.train_batch_size/config.sample.num_image_per_prompt))
     assert config.sample.num_batches_per_epoch % 2 == 0, "Please set config.sample.num_batches_per_epoch to an even number! This ensures that config.train.gradient_accumulation_steps = config.sample.num_batches_per_epoch / 2, so that gradients are updated twice per epoch."
@@ -148,9 +149,9 @@ def geneval_sd3():
     config.sample.global_std = True
     config.sample.same_latent = False
     config.train.ema = True
-    config.save_freq = 60 # epoch
+    config.save_freq = 20 # epoch
     config.eval_freq = 60
-    config.save_dir = f'logs/geneval/sd3.5-M'
+    config.save_dir = '/inspire/ssd/project/25jinqiu14/sunyihang-P-253130146/logs/geneval/sd3.5-M'
     config.reward_fn = {
         "geneval": 1.0,
     }

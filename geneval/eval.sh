@@ -2,10 +2,10 @@ export MODEL_NAME="/inspire/hdd/project/25jinqiu14/sunyihang-P-253130146/stable-
 export OUTPUT_DIR="/inspire/hdd/project/25jinqiu14/sunyihang-P-253130146/diffusers/experiments"
 export workspace="/inspire/hdd/project/25jinqiu14/sunyihang-P-253130146"
 export ckpt=16000
-export OUT_PATH="/inspire/hdd/project/25jinqiu14/sunyihang-P-253130146/geneval/experiments/ckpt-22k"
+export OUT_PATH="/inspire/hdd/project/25jinqiu14/sunyihang-P-253130146/geneval/experiments/ckpt-28k"
 
 python evaluation/evaluate_images.py \
-    /inspire/hdd/project/25jinqiu14/sunyihang-P-253130146/geneval/images \
+    $OUT_PATH \
     --outfile $OUT_PATH/results.jsonl \
     --model-path models \
 

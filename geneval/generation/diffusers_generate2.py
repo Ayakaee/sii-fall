@@ -16,6 +16,9 @@ from diffusers import StableDiffusion3Pipeline
 from accelerate import Accelerator
 from peft import PeftModel
 
+lora_ckpt_path = "/inspire/hdd/project/25jinqiu14/sunyihang-P-253130146/flow_grpo/logs/geneval/sd3.5-M/checkpoints/checkpoint-20/lora"
+
+
 torch.set_grad_enabled(False)
 
 
@@ -86,13 +89,7 @@ def parse_args():
     parser.add_argument(
         "--batch_size",
         type=int,
-        default=1,
-        help="how many samples can be produced simultaneously",
-    )
-    parser.add_argument(
-        "--lora",
-        type=str,
-        default='no',
+        default=4,
         help="how many samples can be produced simultaneously",
     )
     parser.add_argument(
@@ -119,10 +116,8 @@ def main(opt):
 
     # Load model
     pipe = StableDiffusion3Pipeline.from_pretrained(opt.model, torch_dtype=torch.bfloat16)
-    if opt.lora != 'no':
-        lora_ckpt_path = opt.lora
-        pipe.transformer = PeftModel.from_pretrained(pipe.transformer, lora_ckpt_path)
-        pipe.transformer = pipe.transformer.merge_and_unload()
+    pipe.transformer = PeftModel.from_pretrained(pipe.transformer, lora_ckpt_path)
+    pipe.transformer = pipe.transformer.merge_and_unload()
     pipe = pipe.to(device)
     pipe.set_progress_bar_config(disable=True)
 

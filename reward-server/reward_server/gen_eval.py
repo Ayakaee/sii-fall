@@ -46,9 +46,10 @@ def load_geneval():
         CKPT_PATH = os.path.join(MY_CKPT_PATH, f"{OBJECT_DETECTOR}.pth")
         object_detector = init_detector(CONFIG_PATH, CKPT_PATH, device=DEVICE)
 
-        clip_arch = "ViT-L-14"
-        path = '/inspire/hdd/project/25jinqiu14/sunyihang-P-253130146/geneval/mmdetection/reward-server/openai/openai-clip-vit-large-patch14/open_clip_pytorch_model.bin'
+        clip_arch = "ViT-H-14"
+        path = '/inspire/hdd/project/25jinqiu14/sunyihang-P-253130146/geneval/mmdetection/reward-server/openai/CLIP-ViT-H-14-laion2B-s32B-b79K/open_clip_pytorch_model.bin'
         clip_model, _, transform = open_clip.create_model_and_transforms(clip_arch, pretrained=path, device=DEVICE)
+        
         tokenizer = open_clip.get_tokenizer(clip_arch)
 
         with open(os.path.join(os.getcwd(), "reward_server/object_names.txt")) as cls_file:

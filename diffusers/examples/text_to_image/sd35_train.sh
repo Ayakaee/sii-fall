@@ -1,8 +1,9 @@
 export MODEL_NAME="/inspire/hdd/project/25jinqiu14/sunyihang-P-253130146/stable-diffusion-3.5-medium"
-export DATASET_NAME="/inspire/hdd/project/25jinqiu14/public/datasets_new/vismin"
-export OUTPUT_DIR="/inspire/hdd/project/25jinqiu14/sunyihang-P-253130146/diffusers/experiments"
+export DATASET_NAME="/inspire/ssd/project/25jinqiu14/sunyihang-P-253130146/data_new"
+export OUTPUT_DIR="/inspire/ssd/project/25jinqiu14/sunyihang-P-253130146/diffusers/experiments"
 export WANDB_MODE=offline
-export WANDB_DIR=/inspire/hdd/project/25jinqiu14/sunyihang-P-253130146/diffusers
+export WANDB_DIR="/inspire/ssd/project/25jinqiu14/sunyihang-P-253130146/diffusers"
+export WANDB_NAME="full-sft-with-revised-prompt"
 
 mkdir -p "$OUTPUT_DIR"
 export workspace="/inspire/hdd/project/25jinqiu14/sunyihang-P-253130146"
@@ -20,7 +21,7 @@ accelerate launch train_text_to_image_sd3.py \
   --validation_steps=2000 \
   --checkpointing_steps=2000 \
   --resolution=512 \
-  --max_train_steps=30000 \
+  --max_train_steps=18000 \
   --train_batch_size=8 \
   --gradient_accumulation_steps=1 \
   --learning_rate=5e-6 \
@@ -28,3 +29,6 @@ accelerate launch train_text_to_image_sd3.py \
   --report_to wandb \
   --output_dir=$OUTPUT_DIR \
   2>&1 | tee "$OUTPUT_DIR/train.log"
+
+cd /inspire/hdd/project/25jinqiu14/sunyihang-P-253130146/geneval
+bash generate_multi.sh

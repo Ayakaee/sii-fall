@@ -17,3 +17,6 @@ geneval/models
 dataset*
 *.safetensors
 *offline
+Qwen*
+*.jsonl
+*.csv

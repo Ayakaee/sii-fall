@@ -735,8 +735,8 @@ class TextToImageDataset(Dataset):
         #         self.images.append(Image.open(img_path))
         #         self.captions.append(caption)
 
-        from datasets import load_dataset
-        db = load_dataset(dataset_name, split="train", cache_dir=cache_dir)
+        from datasets import load_dataset, load_from_disk
+        db = load_from_disk(dataset_name)
 
         self.images = db[image_column]
         self.captions = db[caption_column]
@@ -969,6 +969,7 @@ def main(args):
         set_seed(args.seed)
 
     # Handle repository creation
+    print('if train encoder:', args.train_text_encoder)
     if accelerator.is_main_process:
         if args.output_dir is not None:
             os.makedirs(args.output_dir, exist_ok=True)
